@@ -48,7 +48,15 @@ library
   else
     if os(darwin)
       c-sources: cbits/hidapi/mac/hid.c
-      frameworks: AppKit
+      frameworks: AppKit, IOKit, CoreFoundation
+      -- extra-framework-dirs:
+      --   /nix/store/3zv54hlyjfivpww8sc9wj5jpdlmza8c7-apple-framework-IOKit/Library/Frameworks,
+      --   /nix/store/jqhsf9rifmvg2fi6na0mmrhj9yx9j9n4-apple-framework-AppKit/Library/Frameworks,
+      --   /nix/store/p0rs4l9594xyairz4b53jcd6l35rf1hq-apple-framework-CoreFoundation/Library/Frameworks
+      -- cc-options: -v -F/nix/store/3zv54hlyjfivpww8sc9wj5jpdlmza8c7-apple-framework-IOKit/Library/Frameworks -F/nix/store/jqhsf9rifmvg2fi6na0mmrhj9yx9j9n4-apple-framework-AppKit/Library/Frameworks -F/nix/store/p0rs4l9594xyairz4b53jcd6l35rf1hq-apple-framework-CoreFoundation/Library/Frameworks  
+      --iframework /System/Volumes/Data/Library/Developer/CommandLineTools/SDKs/MacOSX14.0.sdk/System/Library/Frameworks
+      -- ld-options: -v -F/nix/store/3zv54hlyjfivpww8sc9wj5jpdlmza8c7-apple-framework-IOKit/Library/Frameworks -F/nix/store/jqhsf9rifmvg2fi6na0mmrhj9yx9j9n4-apple-framework-AppKit/Library/Frameworks -F/nix/store/p0rs4l9594xyairz4b53jcd6l35rf1hq-apple-framework-CoreFoundation/Library/Frameworks
+      --/nix/store/jqhsf9rifmvg2fi6na0mmrhj9yx9j9n4-apple-framework-AppKit/Library/Frameworks
     else
       c-sources: cbits/hidapi/linux/hid.c
       extra-libraries: udev
